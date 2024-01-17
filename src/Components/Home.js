@@ -41,7 +41,7 @@ const Home = ({ isLoggedIn, setisLoggedIn }) => {
     handleShow("login")
     const token = localStorage.getItem("token");
     if (isLoggedIn || token) {
-      navigate("/therapy-notes");
+      navigate("/folders");
     }
    
     else if(state?.path){

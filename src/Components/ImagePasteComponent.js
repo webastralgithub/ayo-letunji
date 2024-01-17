@@ -1,45 +1,49 @@
 import React, { useRef } from 'react';
-import { DndProvider } from 'react-dnd';
-import { HTML5Backend } from 'react-dnd-html5-backend';
-import InputField from './InputField';
+
 const ImagePasteComponent = ({updateImage}) => {
-  const inputRef = useRef(null);
+  const pasteContainerRef = useRef(null);
 
-  const handlePaste = (event) => {
-    event.preventDefault();
+  const handlePasteButtonClick = async () => {
+    const pasteContainer = pasteContainerRef.current;
 
-    const items = (event.clipboardData || event.originalEvent.clipboardData).items;
-    const imageItem = Array.from(items).find((item) => item.type.indexOf('image') !== -1);
+    if (pasteContainer) {
+      // Clear paste article
+      pasteContainer.textContent = '';
 
-    if (imageItem) {
-      const blob = imageItem.getAsFile();
-      const imageUrl = URL.createObjectURL(blob);
-        updateImage(imageUrl);
-      let file = new File([blob], "file name", { type: blob.type, lastModified: new Date().getTime() });
-      let container = new DataTransfer();
-      container.items.add(file);
+      try {
+        // Read clipboard data
+        const data = await navigator.clipboard.read();
 
-      const fileInput = inputRef.current;
-      if (fileInput) {
-        fileInput.files = container.files;
+        // Check if it's an image
+        const clipboardContent = data[0];
+
+        console.log(clipboardContent);
+
+        // Get blob representing the image
+        const blob = await clipboardContent.getType('image/png');
+
+        // Create blob URL
+        const blobUri = window.URL.createObjectURL(blob);
+        updateImage(blobUri)
+       
+      } catch (err) {
+        console.log(err);
+
+        // If there is an error, assume it's not an image
+        const text = await navigator.clipboard.readText();
+        pasteContainer.textContent = text;
       }
-      console.log(file);
     }
-    
   };
 
   return (
     <div>
-      <input ref={inputRef} type="file" style={{ display: 'none' }} />
-      <p>Paste an image here:</p>
+      <button onClick={handlePasteButtonClick}>Paste Image</button>
+    
       <div
-        onPaste={(event) => {
-          handlePaste(event);
-        }}
-        contentEditable
-        style={{ width: '100%', height: '500px', border: '1px solid black' }}
+        ref={pasteContainerRef}
+        style={{ border: '1px solid black', margin: '10px', padding: '10px' }}
       ></div>
-  
     </div>
   );
 };

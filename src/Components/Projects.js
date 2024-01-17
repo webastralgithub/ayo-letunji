@@ -15,10 +15,12 @@ const Projects = () => {
   const [toasterMessage, setToasterMessage] = useState('');
   const [notesScreen, setNotesScreen] = useState(false)
   const [screenType, setScreenType] = useState('view')
-
+  const pasteContainerRef = useRef(null);
+  
   const [title, setTitle] = useState()
+  const [edit, setEdit] = useState(false)
   const [image,setImage] =useState('');
-  const [FolderDetail, setFolderDetails] = useState([])
+  const [views, setViews] = useState([])
   const url = process.env.REACT_APP_API_KEY
 
 
@@ -40,8 +42,13 @@ const Projects = () => {
   }, []);
   
   const changeScreen = (note) => {
-    setScreenType("folderview")
-    setFolderDetails(note)
+    setScreenType("views")
+   setViews(note.views)
+    setNotesScreen(true)
+
+  }
+  const changeViewScreen = (note) => {
+    setScreenType("annotation")
     setNotesScreen(true)
 
   }
@@ -69,7 +76,44 @@ const Projects = () => {
     }
   }
 
+  const handlePasteButtonClick = async () => {
+    const pasteContainer = pasteContainerRef.current;
 
+    if (pasteContainer) {
+      // Clear paste article
+      pasteContainer.textContent = '';
+
+      try {
+        // Read clipboard data
+        const data = await navigator.clipboard.read();
+
+        // Check if it's an image
+        const clipboardContent = data[0];
+
+        console.log(clipboardContent);
+
+        // Get blob representing the image
+        const blob = await clipboardContent.getType('image/png');
+
+        // Create blob URL
+        const blobUri = window.URL.createObjectURL(blob);
+        updateImage(blobUri)
+       
+      } catch (err) {
+        console.log(err);
+
+        // If there is an error, assume it's not an image
+        const text = await navigator.clipboard.readText();
+        pasteContainer.textContent = text;
+      }
+    }
+  };
+
+  const handleEdit = () => {
+    setEdit((prevEdit) => !prevEdit);
+  };
+  
+   
 
   const submit= async()=>{
     const body ={
@@ -101,9 +145,9 @@ const Projects = () => {
 
   return (
     <div>
-       
-      <MiniHeader head='Folders' />
-      <ToastContainer />
+        <ToastContainer />
+        <MiniHeader head={screenType === "views" ? "Views" : screenType === "annotation" ? "Create Annotation" : "Forlder"} />
+     
       {!notesScreen &&
       <div className='top-btn-aftr-title'>
 
@@ -140,21 +184,7 @@ const Projects = () => {
                   <td >{folder.created_at.slice(0, 10)}, {new Date(folder.created_at).toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })}</td>
                 </tr>
               ))}
-            {/* {folders?.length > 0 && folders.map(folder => <div onClick={() => {
-                  changeScreen(folder)
-
-                }} className='addnote-child'>
-                  <tr key={index}></tr>
-              <img className="" src="./images/files.png"></img>
-              <h5>{folder.created_at.slice(0, 10)}</h5>
-              <p>{folder.name}</p>
-              <div className='timing'>
-                <p>{new Date(folder.created_at).toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })}</p>
-                <img  src='/images/right-arrow.svg' />
-                
-                </div>
-                
-            </div>)} */}
+          
           
 
             </tbody>
@@ -163,10 +193,10 @@ const Projects = () => {
         </div>
       
       </div>}
-      {notesScreen && screenType=="folderview"&& <div>
+      {notesScreen && screenType=="annotation"&& <div>
 
         <div className='buttons-bundle'>
-            <button>
+            <button onClick={handlePasteButtonClick}>
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard-check" viewBox="0 0 16 16">
                 <path fill-rule="evenodd" d="M10.854 7.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708 0"/>
                 <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1z"/>
@@ -175,7 +205,7 @@ const Projects = () => {
               Paste
             </button>
 
-           <button>
+           <button onClick={handleEdit}>
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
               <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
               <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
@@ -228,11 +258,16 @@ const Projects = () => {
 </svg>Export</button>
         </div>
 
-         {!image &&<ImagePasteComponent updateImage={updateImage}/>}
-         {image && <AnnotateScreenshots img={image}/>}
+         {!image &&<div
+         
+        ref={pasteContainerRef}
+        style={{ border: '1px solid black', margin: '10px', padding: '10px', height:"100vh"}}
+      >  <span>Paste an image here...</span>
+        </div>}
+         {image && <AnnotateScreenshots img={image} edit={edit}/>}
          {/* <PageBuilder /> */}
          </div> }
-      {notesScreen && screenType!="folderview"&& <div>
+      {notesScreen && screenType!="annotation"&& screenType!="views" &&<div>
         <form >
           <div className="input-group">
 
@@ -250,6 +285,30 @@ const Projects = () => {
 
         <button className='custom_notes'><img src="/images/del.png" alt="my image" /></button>
         <button className='custom_notes_save' onClick={submit}><img src="/images/save.png" alt="my image" /></button>
+      </div>}
+      {notesScreen && screenType=="views"&& <div>
+      <div className='table-responsive-mn'>
+          <table border="1">
+            <thead>
+              <tr>
+                <th> Name</th>
+                <th>Last Updated</th>
+              </tr>
+            </thead>
+            <tbody>
+            {views?.length > 0 && views.map((view, index) => (
+                <tr key={index}>
+                  <td onClick={() => {changeViewScreen(view)}} className='hightlgt'>{view.name}</td>
+                  <td >{view.created_at.slice(0, 10)}, {new Date(view.created_at).toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })}</td>
+                </tr>
+              ))}
+          
+          
+
+            </tbody>
+            
+          </table>
+        </div>
       </div>}
     </div>
 
