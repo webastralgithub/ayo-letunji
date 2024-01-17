@@ -1,0 +1,11 @@
+> footer.js
+> style.css
+> home.js
+>login.css
+add icon (upload-icon.svg)
+>calender.css
+>app.css
+>navbar.css
+>delete-icon.svg
+>goals.js
+>goal.css

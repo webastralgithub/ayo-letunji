@@ -1,0 +1,364 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+*{
+  font-family: 'Poppins', sans-serif;
+}
+
+.container-fluid{
+  /* max-width: 1300px; */
+  margin: 0 auto;
+}
+
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+/* Example CSS for the UserTable component */
+
+/* Table styles */
+table {
+  border-collapse: collapse;
+  width: 100%;
+  border: 1px solid #ddd;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+/* Checkbox styles */
+input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+/* Hover effect for rows */
+tr:hover {
+  background-color: #f5f5f5;
+}
+
+.sidenav {
+  height: 55%; /* Full-height: remove this if you want "auto" height */
+  width: 160px; /* Set the width of the sidebar */
+   /* Fixed Sidebar (stay in place on scroll) */
+  z-index: 1; /* Stay on top */
+  top: 80px; /* Stay at the top */
+  left: 0;
+  background-color: #0B394E;
+
+  color: #fff;
+  overflow-x: hidden; /* Disable horizontal scroll */
+  padding-top: 20px;
+}
+.main {
+  padding: 100px 40px 0 10px;
+  height: 100%;
+  width: calc(100% - 270px);
+  margin-left: 270px;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type=number] {
+  -moz-appearance: textfield;
+}
+.sidenav {
+  height: 100%;
+  width: 220px;
+}
+.content-main {
+  position: relative;
+  /* display: grid; */
+  /* grid-template-columns: 1fr 3.5fr; */
+  display: block;
+  margin-bottom: 25px;
+  padding: 0;
+}
+.toggleSwitch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.toggleSwitch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.toggleSwitch-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+  border-radius: 34px;
+  height: 24px;
+  width: 48px;
+}
+
+.toggleSwitch-slider:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 3px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+  border-radius: 50%;
+}
+
+input:checked + .toggleSwitch-slider {
+  background-color: #f9610a;
+}
+
+input:focus + .toggleSwitch-slider {
+  box-shadow: 0 0 1px #f9610a;
+}
+
+input:checked + .toggleSwitch-slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+.user-profile{
+  border-radius: 6px;
+  font-family: 'Inter', sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 30px;
+  line-height: 32px;
+  color: #000000;
+}
+label.custom-file-upload.fas {
+  width: 100%;
+}
+.btn-add{
+  position: absolute;
+width: 179px;
+height: 34px;
+
+color: #fff;
+background: #0B394E;
+border-radius: 6px;
+}
+
+.btn-save{
+  color: #fff;
+  background: #FF4F5A;
+width: 179px;
+height: 40px;
+
+
+}
+.topleft {
+  background: #0B394E;
+  box-shadow: 0px 7px 23px rgba(18, 18, 18, 0.13);
+  border-radius: 0px 0px 30px 30px;
+  margin-top: 25px;
+  margin-bottom: 25px;
+  position: relative;
+    padding: 40px;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+.addone-value.on-user-mng {
+  margin: 25px 0;
+  float: right;
+}
+
+.top-btn-aftr-title .addnote-child.addone-value{
+  background: #f9610a;
+  border: none;
+  border-radius: 3px;
+  align-items: center;
+}
+
+.top-btn-aftr-title .addone-value.on-user-mng{
+   float: unset;
+}
+
+.top-btn-aftr-title .addnote-child.addone-value img{
+  width: 13px;
+  object-fit: contain;
+  filter: invert(1);
+  border: 1px solid #000;
+  height: 13px;
+  border-radius: 2px;
+  padding: 2px;
+}
+
+.top-btn-aftr-title .addnote-child.addone-value p{
+  color: #fff;
+}
+
+.table-responsive-mn {
+  padding: 30px 55px 0;
+}
+
+.table-responsive-mn table{
+  width: 90%;
+  border: none;
+}
+
+.table-responsive-mn table thead{
+  border: 1px solid #e5e5e5;
+}
+
+.table-responsive-mn table tbody tr{
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.table-responsive-mn table th, .table-responsive-mn table td{
+  border: none;
+}
+
+.table-responsive-mn table th, .table-responsive-mn table td{
+  font-size: 14px;
+  font-weight: 600;
+  color: #727272;
+  padding: 10px 8px;
+}
+
+.table-responsive-mn table .hightlgt{
+  color: #000;
+} 
+
+.buttons-bundle{
+  display: flex;
+  justify-content: flex-end;
+  margin-top: -32px;
+  gap: 15px;
+}
+
+.buttons-bundle button{
+  background: none;
+  padding: 0;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 14px;
+}
+
+.table-responsive-mn-user{
+   padding: 30px 0;
+}
+
+.table-responsive-mn-user tbody tr td:first-child{
+  color: #000;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+/* responsive ************************************************************************* */
+@media(max-width:576px){
+  .content-main {
+    grid-template-columns: 1fr;
+}
+.main {
+  padding: 0px;
+  height: 100%;
+}
+}
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+
+@media(max-width:900px){
+  .table-responsive-mn {
+    padding: 30px 0px 0;
+  }
+
+  .main {
+    width: calc(100% - 220px);
+    margin-left: 220px;
+  }
+
+  .table-responsive-mn table {
+    width: 100%;
+  }
+
+  .buttons-bundle {
+    justify-content: flex-start;
+    margin-top: 23px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+  }
+}
+
+@media(max-width:600px){
+  .main {
+    width: calc(100% - 0px);
+    margin-left: 0px;
+    padding: 0 15px;
+  }
+
+  .top-nav-tp{
+    position: relative !important;
+    padding-left: 110px !important;
+  }
+
+  .top_nav .navbar {
+    padding: 0px !important;
+    position: absolute;
+    top: 11px;
+    z-index: 999;
+  }
+
+  .user-profile {
+    margin-top: 30px;
+    text-align: left !important;
+  }
+
+  .top-btn-aftr-title .addnote-child.addone-value {
+    margin-bottom: 0;
+  }
+}
+
