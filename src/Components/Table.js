@@ -80,7 +80,7 @@ const Table=({annotations,attribute})=>{
           ))}
         </tbody>
       </table>
-      <button onClick={handleSubmit}>Submit</button>
+      {/* <button onClick={handleSubmit}>Submit</button> */}
     </div>
   );
 }

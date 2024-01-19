@@ -37,6 +37,8 @@ const AnnotateScreenshots = (props) => {
     }
   };
 
+  console.log(annotations,'annotations');
+
   const onSubmit = (newAnnotation) => {
     const { geometry, data } = newAnnotation;
 
@@ -56,33 +58,47 @@ const AnnotateScreenshots = (props) => {
   const saveImageWithAnnotations = async () => {
     try {
       // Capture the content of the annotation container
-      const annotationContainer = document.getElementById('annotation-container');
-      const annotationCanvas = await html2canvas(annotationContainer);
-
-      // Capture the content of the table container
-      const tableContainer = document.getElementById('table-container');
-      const tableCanvas = await html2canvas(tableContainer);
-
-      // Convert canvas to data URLs
-      const annotationData = annotationCanvas.toDataURL('image/png');
-      const tableData = tableCanvas.toDataURL('image/png');
-
+      const canvas = await html2canvas(document.getElementById('annotation-container'));
+  
+      // Convert canvas to a data URL
+      const imageData = canvas.toDataURL('image/png');
+  
       // Create a new PDF document
       const pdf = new jsPDF('p', 'mm', 'a4');
+      pdf.addImage(imageData, 'PNG', 10, 10, 190, 100); // Adjust the parameters as needed
+  
+      // Add a table for annotation data using jspdf-autotable
+      const tableData = [['Text', 'Description', 'EN', 'FR', 'Source', 'Notes']];
+      annotations.forEach((annotation) => {
+        const { text } = annotation.data;
+        const {  description, en, fr, source, notes } = annotation;
+        tableData.push([text, description, en, fr, source, notes]);
+      });
+      const startY = 120; // Adjust the Y position as needed
+    const margin = 10;
+    const cellWidth = (pdf.internal.pageSize.width - 2 * margin) / 7;
+    const cellHeight = 10;
+    const fontSize = 12;
 
-      // Add annotated image to the PDF
-      pdf.addImage(annotationData, 'PNG', 10, 10, 190, 100);
+    pdf.setFontSize(fontSize);
+    pdf.setTextColor(0, 0, 0);
+    pdf.text('Annotation Data', margin, startY);
 
-      // Add table to the PDF
-      pdf.addPage();
-      pdf.addImage(tableData, 'PNG', 10, 10, 190, 100);
-
+    tableData.forEach((row, rowIndex) => {
+      row.forEach((cell, cellIndex) => {
+        pdf.rect(margin + cellIndex * cellWidth, startY + rowIndex * cellHeight, cellWidth, cellHeight, 'S');
+        pdf.text(cell, margin + cellIndex * cellWidth + 2, startY + rowIndex * cellHeight + 8);
+      });
+    });
+  
       // Save or open the PDF
       pdf.save('image_with_annotations.pdf');
     } catch (error) {
       console.error('Error exporting to PDF:', error);
     }
   };
+  
+
 
   const getToolbarItem = (selector) => {
     return (

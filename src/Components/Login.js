@@ -119,9 +119,10 @@ const Login = ({ login, setLogin, isLoggedIn, setisLoggedIn }) => {
       }
       try {
         const response = await axios.post(`${url}/register`, form_data);
-
+         
         const token = JSON.stringify(response.data.token);
         localStorage.setItem("token", token);
+        
         if (token) {
           navigate("/home");
           setisLoggedIn(true);
@@ -288,7 +289,7 @@ const Login = ({ login, setLogin, isLoggedIn, setisLoggedIn }) => {
                 <div className="mb-3 input-box">
                   <FaLock />
                   <input
-                    type="password"
+                    type="password"Sidebar
                     className="inp"
                     name="password_confirmation"
                     placeholder="Confirm Password"

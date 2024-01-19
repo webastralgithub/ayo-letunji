@@ -1,0 +1,23 @@
+
+  .inp{
+    width: 100%;
+    padding: 6px;
+    box-sizing: border-box;
+    border-radius: 4px;
+  }
+  .create-user-btn{
+  float: right;
+  background-color: #f9610a;
+    
+  }
+  .login-modal .modal-dialog {
+    max-width: 516px !important;
+}
+.login-modal input.inp {
+    border-radius: 4px;
+}
+.btn:hover {
+    color: var(--bs-btn-hover-color);
+    background-color: #ff5d00;
+    border-color: var(--bs-btn-hover-border-color);
+}

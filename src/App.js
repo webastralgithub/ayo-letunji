@@ -58,7 +58,7 @@ navigate("/")
  
     <div className="top-nav-tp">
        <img src="/images/latunji-logo.png"/> 
-       <Button onClick={onLogout} className="nav-item nav-link px-3">Logout</Button>
+       {isLoggedIn &&<Button onClick={onLogout} className="nav-item nav-link px-3">Logout</Button>}
     </div>
      { <Navbar isLoggedIn={isLoggedIn} setisLoggedIn={setisLoggedIn}/>}
      <div className={HomePageStyling}>
