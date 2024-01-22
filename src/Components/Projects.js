@@ -1,5 +1,6 @@
 import React, { useState, useLayoutEffect, useRef } from "react";
 import "./Projects.css";
+
 import Toaster from "./Toaster";
 import PageBuilder from "./PageBuilder";
 import MiniHeader from "./MiniHeader";
@@ -10,6 +11,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import AnnotateScreenshots from "./AnnotateScreenshots";
 import { DNA } from "react-loader-spinner";
+import BackButton from "./BackButton";
 const Projects = () => {
   const [folders, setNotes] = useState();
   const [toasterMessage, setToasterMessage] = useState("");
@@ -131,7 +133,26 @@ const Projects = () => {
 
     setNotesScreen(false);
   };
-  console.log(screenType);
+
+  const handleBack =()=>{
+      if(screenType === "views" ){
+        setScreenType("folder");
+        setNotesScreen(false);
+      }
+      else if(screenType === "annotation"){
+        console.log('annotationannotationannotation');
+        setScreenType("views");
+        setNotesScreen(true);
+      }
+      else if(screenType === "form" && !formType){
+        setScreenType("views");
+        setNotesScreen(true);
+      }
+      else if(screenType === "form" && formType){
+        setScreenType("folder");
+        setNotesScreen(false);
+      }
+  }
   // const deletehandler = async () => {
   //   const rest = await axios.delete(`${url}/note/${id}`, config);
   //   setToasterMessage('Deleted successfully');
@@ -139,6 +160,7 @@ const Projects = () => {
   //   setTrack(null)
   //   setid(null)
   // }
+  console.log(screenType);
 
   return (
     <div>
@@ -155,6 +177,7 @@ const Projects = () => {
         </div>
       )}
       <ToastContainer />
+      <BackButton onClick={handleBack}/>
       <MiniHeader
         head={
           screenType === "folder"
@@ -164,7 +187,7 @@ const Projects = () => {
             : screenType === "annotation"
             ? "Create Annotation"
             : formType
-            ? "Forlder"
+            ? "Folder"
             : "View"
         }
       />

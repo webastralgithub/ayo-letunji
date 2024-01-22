@@ -17,7 +17,7 @@
     border-radius: 4px;
 }
 .btn:hover {
-    color: var(--bs-btn-hover-color);
+    /* color: var(--bs-btn-hover-color); */
     background-color: #ff5d00;
     border-color: var(--bs-btn-hover-border-color);
 }
