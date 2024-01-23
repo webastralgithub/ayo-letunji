@@ -4,18 +4,13 @@ import "./App.css"
 import { Route, Routes,useLocation } from 'react-router-dom'
 
 import Home from './Components/Home';
-import Profile from './Components/Profile';
 
 import Projects from './Components/Projects';
 import Sidebar from './Components/Sidebar';
 import Footer from './Footer/Footer';
 import Navbar from './Header/Navbar';
 import Protected from './Components/Protected';
-import HomeWork from './Components/HomeWork';
-import Notifications from './Components/Notifications';
-import detect from 'devtools-detect';
-import Notes from './Components/Notes';
-import NotesDisp from './Components/NotesDisp';
+
 import User from './Components/User/User';
 import Attribute from './Components/Attribute';
 import { Link, useNavigate } from 'react-router-dom';

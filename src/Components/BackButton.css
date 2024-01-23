@@ -1,20 +1,21 @@
 /* styles.css */
 
 .back-button {
-    background-color: #3498db;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    display: flex;
-    align-items: center;
-    transition: background-color 0.3s ease-in-out;
-  }
+  background-color: #f96112;
+  color: #fff;
+  padding: 6px 17px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  transition: background-color 0.3s ease-in-out;
+  margin-bottom: 20px;
+}
   
   .back-button:hover {
-    background-color: #2980b9;
+    background-color: #f96112;
   }
   
   .back-button span {

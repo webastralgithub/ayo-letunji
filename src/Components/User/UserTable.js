@@ -5,7 +5,6 @@ import { FaEye, FaEyeSlash, FaLock, FaUser } from "react-icons/fa";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import ToggleButton from "../ToggleButton";
-import Toaster from "../Toaster";
 import { ToastContainer, toast } from "react-toastify";
 import "./User.css";
 import { DNA } from "react-loader-spinner";

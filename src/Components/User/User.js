@@ -2,7 +2,6 @@ import React, { useLayoutEffect, useState } from 'react';
 import UserTable from './UserTable';
 import axios from 'axios';
 import MiniHeader from '../MiniHeader';
-import Toaster from '../Toaster';
 import { DNA } from "react-loader-spinner";
 const User = () => {
 

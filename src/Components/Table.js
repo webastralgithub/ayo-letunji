@@ -18,7 +18,7 @@ const Table=({annotations,attribute})=>{
     console.log("Sending data to API:", editedAnnotations);
     // Replace `console.log` with your API call logic
   };
-
+  console.log(annotations);
   return (
     <div>
       <table border="1">
