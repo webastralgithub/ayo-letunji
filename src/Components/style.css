@@ -973,7 +973,13 @@ width: 100% !important;
 }
 .custom_notes_save{
   border: none;
- 
+  background: #f96112;
+  color: #fff;
+  gap: 10px;
+  display: flex;
+  align-items: center;
+  padding: 5px 20px;
+  border-radius: 4px;
 }
 .custom_notes_save img{
   width: 39px;

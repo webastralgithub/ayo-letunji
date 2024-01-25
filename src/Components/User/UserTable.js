@@ -240,7 +240,7 @@ const UserTable = ({ userData = [], toggleActive, updateUserData,onUpdateStatus 
                       name="user_type"
                       className="inp"
                     >
-                      <option value="">Select...</option>
+                      <option value="">Please select a user type</option>
                       <option value="1">Administrator</option>
                       <option value="2">User</option>
                     </select>
