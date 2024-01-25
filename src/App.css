@@ -128,6 +128,11 @@ input[type=number] {
   border-radius: 50%;
 }
 
+.activation .toggleSwitch-slider:before {
+  height: 12px;
+  width: 12px;
+}
+
 input:checked + .toggleSwitch-slider {
   background-color: #f9610a;
 }
@@ -566,8 +571,100 @@ color: #7A93A7;
   font-weight: 600;
   display: none;
 }
-
-
+div#root .top-nav-tp .logout-btn {
+  padding: 10px 110px 7px 10px !important;
+  font-size: 13px;
+  background: #fff;
+  border-radius: 2px;
+  box-shadow: 0px 0px 3px 0px #ada9a9;
+  /* text-align: start; */
+}
+.user-dropdown {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  transition: all 0.8s;
+  position: relative;
+}
+.hovered button {
+  position: absolute;
+  top: 34px;
+  left: -136px;
+}
+.user-dropdown img {
+  width: 30px !important;
+  margin-bottom: 5px;
+  padding: 5px;
+  background-color: grey;
+  border-radius: 50%;
+}
+.img-fluid {
+  max-width: 45%;
+  height: auto;
+  position: relative;
+  top: 20px;
+  z-index: 99;
+}
+.new-user {
+  margin-top: 20px;
+}
+.new-user .user-input-box {
+  margin-bottom: 27px !important;
+}
+.user-input-box select.inp {
+  border: 1px solid #ddd;
+  background-color: #fff;
+  color: #000000b8;
+  padding: 4px 10px;
+  margin-top: 6px;
+}
+.activation {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.activation label.toggleSwitch span.toggleSwitch-slider {
+  height: 18px;
+  width: 40px;
+}
+.signup-wrapper form .button-wrapper button {
+  border: unset;
+  padding: 5px 12px;
+  font-size: 18px;
+  border-radius: 5px;
+  font-weight: 600;
+}
+.signup-wrapper form {
+  padding: 0px 20px 20px 20px;
+}
+.signup-wrapper form hr {
+  color: #858080;
+  width: 200%;
+  position: relative;
+  left: -20%;
+}
+td.hover-action {
+  position: relative;
+}
+.action-buttons {
+  display: none;
+}
+/* .action-buttons {
+  display: flex;
+  gap: 5px;
+} */
+td.hover-action:hover .action-buttons {
+  display: flex;
+  position: absolute;
+  top: 0px;
+  left: -12px;
+  background-color: #fff;
+  padding-top: 10px;
+  gap: 7px;
+}
+.action-buttons img {
+  width: 25px;
+}
 @media(max-width:480px){
   .main-calender-cst .fc-media-screen .fc-header-toolbar {
       flex-direction: column;

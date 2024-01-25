@@ -94,8 +94,8 @@ color: #232323;
 .login-modal h2 {
     font-family: 'Inter';
     font-style: normal;
-    font-weight: 600;
-    font-size: 36px;
+    font-weight: 500;
+    font-size: 20px;
     line-height: 54px;
     color: #181D2D;
 }
@@ -190,16 +190,17 @@ text-decoration: none;
     background: #FF4F5A;
 }
 .login-modal .modal-content {
-    padding: 20px;
     background: #FFFFFF;
     box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.13);
-    border-radius: 25px;
+    border-radius: unset !important;
+    border-top: 2px solid #000000b0;
 }
 .login-wrapper{
     padding: 20px 40px 20px 10px;
 }
 .signup-wrapper {
-    padding: 0px 40px 20px 30px;
+    position: relative;
+    top: -25px;
 }
 .input-feilds-wrapper{
     width: 70%;

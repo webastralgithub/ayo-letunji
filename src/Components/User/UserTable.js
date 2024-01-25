@@ -170,7 +170,7 @@ const UserTable = ({ userData = [], toggleActive, updateUserData,onUpdateStatus 
       <ToastContainer />
       <div className="addnote-child addone-value on-user-mng" onClick={adduser}>
         <img src="/images/Vector.png" />
-        <p>Add user</p>
+        <p>New user</p>
       </div>
       {/* <button className='btn-save' >Add User</button> */}
       <div className="table-responsive-mn table-responsive-mn-user">
@@ -210,7 +210,7 @@ const UserTable = ({ userData = [], toggleActive, updateUserData,onUpdateStatus 
             style={{ border: "none", background: "transparent" }}
             onClick={handleClose}
           >
-            <img className="img-fluid" src="/images/cross.png" />
+            <img className="img-fluid user-create-close" src="/images/cross.png" />
           </button>
         </div>
         {showModal && (
@@ -218,6 +218,7 @@ const UserTable = ({ userData = [], toggleActive, updateUserData,onUpdateStatus 
             <form onSubmit={signup}>
               {error && <div style={{ color: "red" }}>{error}</div>}
               <h2>Create New User</h2>
+              <hr></hr>
               <div className="user-inner-wrapper">
                 <div className="new-user">
                   <div className="mb-3 user-input-box">
@@ -256,7 +257,7 @@ const UserTable = ({ userData = [], toggleActive, updateUserData,onUpdateStatus 
                       onChange={handleChange}
                     />
                   </div>
-                  <div className="mb-3 user-input-box">
+                  <div className="mb-3 user-input-box activation">
                     <label>Activation</label>
                     <ToggleButton
                       isActive={false}

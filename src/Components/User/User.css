@@ -14,7 +14,11 @@
     max-width: 516px !important;
 }
 .login-modal input.inp {
-    border-radius: 4px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+  padding: 4px 10px;
+  font-style: italic;
+  margin-top: 4px;
 }
 .btn:hover {
     /* color: var(--bs-btn-hover-color); */

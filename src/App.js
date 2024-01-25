@@ -23,6 +23,15 @@ const App=()=> {
   const [expanded, setExpanded] = useState(false);
   const navigate=useNavigate()
   const location = useLocation();
+  const [isHovered, setIsHovered] = useState(false);
+
+  const handleMouseEnter = () => {
+    setIsHovered(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+  };
   let HomePageStyling ='content-main container-fluid'
   if (location.pathname === '/'||location.pathname === '/termsandconditions') {
     HomePageStyling = '';
@@ -34,8 +43,9 @@ setExpanded(false)
 navigate("/")
 }
 
+
   useEffect(() => {
-    
+    setIsHovered(false)
     const token=localStorage.getItem('token')
     if(!token){
       setisLoggedIn(false)
@@ -53,7 +63,21 @@ navigate("/")
  
     <div className="top-nav-tp">
        <img src="/images/latunji-logo.png"/> 
-       {isLoggedIn &&<Button onClick={onLogout} className="nav-item nav-link px-3">Logout</Button>}
+       
+       {isLoggedIn &&<>
+       <div  className={`user-dropdown ${isHovered ? "hovered" : ""}`}
+       onMouseEnter={handleMouseEnter}
+       onMouseLeave={handleMouseLeave}>
+       <img
+       src="/images/userLogin.png"
+     
+     />
+      {isHovered &&
+     
+       <Button onClick={onLogout} className="nav-item nav-link px-3 logout-btn">Logout</Button>
+      } 
+       </div>
+       </>}
     </div>
      { <Navbar isLoggedIn={isLoggedIn} setisLoggedIn={setisLoggedIn}/>}
      <div className={HomePageStyling}>

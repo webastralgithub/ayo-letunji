@@ -135,9 +135,8 @@ const AnnotateScreenshots = (props) => {
       const annotationContainer = document.getElementById('annotation-container');
       const annotationTextContainer = document.getElementById('annotation-text');
   
-      const [imageData, imageDataText] = await Promise.all([
+      const [imageData] = await Promise.all([
         domtoimage.toPng(annotationContainer),
-        domtoimage.toPng(annotationTextContainer),
       ]);
   
       // Create a new PDF document
