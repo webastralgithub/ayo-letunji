@@ -217,7 +217,7 @@ const UserTable = ({ userData = [], toggleActive, updateUserData,onUpdateStatus 
           <div className="signup-wrapper">
             <form onSubmit={signup}>
               {error && <div style={{ color: "red" }}>{error}</div>}
-              <h2>Create New User</h2>
+              <h2>Create a new user</h2>
               <hr></hr>
               <div className="user-inner-wrapper">
                 <div className="new-user">

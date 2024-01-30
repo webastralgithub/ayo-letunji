@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import "./Sidebar.css";
 
-const Sidebar = () => {
+const Sidebar = ({disabled}) => {
   const [user, setUser] = useState(null);
   const [activeSubMenu, setActiveSubMenu] = useState(null);
 
@@ -15,8 +15,11 @@ const Sidebar = () => {
   const toggleSubMenu = (submenu) => {
     setActiveSubMenu((prevSubMenu) => (prevSubMenu === submenu ? null : submenu));
   };
-
+console.log(disabled);
   return (
+    <>
+    {!disabled &&
+     
     <div className="sidenav">
       <Link
         to="/folders"
@@ -55,11 +58,11 @@ const Sidebar = () => {
                 Settings
               </div>
 
-              <img
+              {/* <img
               src="/images/icons/Vector.svg"
               alt="icon"
               className={activeSubMenu === "settings" ? "rotate-icon" : ""}
-            />
+            /> */}
             </Link>
             
           </div>
@@ -76,7 +79,7 @@ const Sidebar = () => {
               >
                 <div>
                 <img src="/images/icons/Vector.svg" alt="icon" />
-                  Manage User
+                  Manage Users
                 </div>
                 
               </Link>
@@ -99,7 +102,8 @@ const Sidebar = () => {
           )}
         </div>
       )}
-    </div>
+    </div>}
+   </>
   );
 };
 

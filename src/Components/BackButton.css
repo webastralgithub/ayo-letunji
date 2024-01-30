@@ -7,11 +7,13 @@
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 12.93px;
   display: flex;
   align-items: center;
   transition: background-color 0.3s ease-in-out;
   margin-bottom: 20px;
+  width: 114px;
+  justify-content: center;
 }
   
   .back-button:hover {

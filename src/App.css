@@ -33,7 +33,7 @@ th, td {
 }
 
 th {
-  background-color: #f2f2f2;
+  background-color: #f7f9f9;
 }
 
 /* Checkbox styles */
@@ -217,11 +217,60 @@ height: 40px;
   border-radius: 3px;
   align-items: center;
   cursor: pointer;
+  width: 114px;
+}
+
+button:focus{
+  box-shadow: none !important;
 }
 
 .top-btn-aftr-title .addone-value.on-user-mng{
    float: unset;
 }
+.hightlgt span{
+  display: none;
+}
+
+.hightlgt input{
+  border: none;
+    background: #d5d5d5;
+    padding: 4px 10px;
+}
+
+.hightlgt input:focus-visible{
+  outline: none;
+}
+
+.logout-message{
+  display: flex;
+  justify-content: space-between;
+}
+
+.logout-message{
+  background: #e3fcef;
+  padding: 10px 16px;
+  margin-bottom: 25px;
+}
+
+.logout-message p{
+  margin-bottom: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  color: #000;
+  font-weight: 300;
+}
+
+.logout-message p svg path{
+  color: #00875a !important;
+}
+
+.logout-message span svg{
+  width: 23px;
+  height: 23px;
+}
+
 
 .top-btn-aftr-title .addnote-child.addone-value img{
   width: 13px;
@@ -238,7 +287,7 @@ height: 40px;
 }
 
 .table-responsive-mn {
-  padding: 30px  0;
+  padding: 30px 55px;
 }
 
 .table-responsive-mn table{
@@ -262,7 +311,7 @@ height: 40px;
   font-size: 14px;
   font-weight: 600;
   color: #727272;
-  padding: 10px 8px;
+  padding: 13px 8px;
 }
 .spinner {
   position: fixed;
@@ -276,13 +325,19 @@ height: 40px;
   background-color: #3a373754;
   z-index: 9999;
 }
-.table-responsive-mn table .hightlgt{
+.table-responsive-mn table .hightlgt,
+.table-responsive-mn table .highlight2{
   color: #000;
   cursor: pointer;
 } 
 td.hightlgt:hover {
   color: #2424dbef;
 }
+
+.edit-folder-name-edit{
+  margin-left: 5px;
+}
+
 .buttons-bundle{
   display: flex;
   justify-content: flex-end;
@@ -330,9 +385,69 @@ line-height: 35px;
   font-weight: 500;
 }
 
+.modal-content form .user-inner-wrapper label.toggleSwitch{
+  margin-left: 10px;
+}
+
 .modal-content form .user-inner-wrapper select{
   padding: 7px 7px;
+  font-style: italic;
+  font-size: 16px;
+  color: #000;
+  opacity: 0.6;
+}
+
+.sidenav-scren div span{
+  font-family: 'Inter';
+  font-style: normal;
   font-weight: 500;
+  font-size: 14px;
+  line-height: 13px;
+  color: #f9610a;
+  padding: 0px !important;
+  display: flex;
+  justify-content: space-between;
+  margin: 0px 1rem 1.3rem;
+  text-decoration: none;
+}
+
+.sidenav-scren .nav-inner-nav-screen-sht{
+   padding-left: 40px;
+}
+
+.sidenav-scren .nav-inner-nav-screen-sht .nav-inner-nav-screen-sht{
+  padding-left: 0;
+}
+
+.sidenav-scren .nav-inner-nav-screen-sht .folder-header .arow-rotate{
+  transform: rotate(90deg);
+}
+
+.paste-canvas-over{
+  margin: 10px 0 !important;
+  border: 1px solid #bbb !important;
+}
+
+.sidenav-scren .folder-header{
+   padding: 0;
+   justify-content: flex-start;
+}
+
+.sidenav-scren .folder-header span{
+  margin-left: 0 !important;
+}
+
+.sidenav-scren .folder-header span{
+  margin-bottom: 11px;
+}
+
+.sidenav-scren .folder-header:hover,
+.sidenav-scren .folder-children:hover{
+  background: none !important;
+}
+
+.sidenav-scren .nav-inner-nav-screen-sht .folder-children{
+  padding-left: 10px;
 }
 
 .modal-content button img.user-create-close{
@@ -365,6 +480,7 @@ line-height: 35px;
 @media(max-width:900px){
   .table-responsive-mn {
     padding: 30px 0px 0;
+    overflow: auto;
   }
 
   .main {
@@ -617,6 +733,7 @@ div#root .top-nav-tp .logout-btn {
   align-items: end;
   transition: all 0.8s;
   position: relative;
+  margin-top: 8px;
 }
 .hovered button {
   position: absolute;
@@ -761,6 +878,14 @@ button.swal2-confirm{
   margin-right: 10px;
 }
 
+.border-annotation{
+  border: 2px dashed #f96112;
+  padding: 3px;
+}
+.annot-cursor{
+  cursor: crosshair;
+}
+
 @media(max-width:480px){
   .main-calender-cst .fc-media-screen .fc-header-toolbar {
       flex-direction: column;
@@ -774,7 +899,7 @@ button.swal2-confirm{
   .main {
     width: calc(100% - 0px);
     margin-left: 0px;
-    padding: 0 15px;
+    padding: 20px 15px 0;
   }
 
   .top-nav-tp{
@@ -796,6 +921,11 @@ button.swal2-confirm{
 
   .top-btn-aftr-title .addnote-child.addone-value {
     margin-bottom: 0;
+  }
+
+  .create-folder-nw-block input{
+    width: 100%;
+    margin-bottom: 10px;
   }
 }
 

@@ -236,7 +236,7 @@ text-decoration: none;
     border: 1px solid #dddddd;
     border-radius: 5px;
     padding: 15px 22px;
-    width: 500px;
+    width: 505px;
 }
 
 .login-wrapper .login-input-wrapper > h2{
@@ -257,22 +257,29 @@ text-decoration: none;
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    width: 69%;
+    width: 70%;
     margin: 0 auto;
+}
+
+.login-wrapper .login-input-wrapper .input-box:first-child{
+    margin-bottom: 10px !important;
 }
 
 .login-wrapper .login-input-wrapper .input-box{
     border-bottom: 0;
+    margin-bottom: 8px !important;
+    padding-bottom: 0;
 }
 
 .login-wrapper .login-input-wrapper .input-box label{
-    font-size: 15px;
-    color: #424242;
+    font-size: 14px;
+    color: #605e5e;
+    margin-right: 5px;
 }
 
 .login-wrapper .login-input-wrapper .input-box input{
     background: transparent;
-    font-size: 12px;
+    font-size: 13px;
     border: 1px solid #adacac;
     border-radius: 3px;
     padding: 5px 5px;
@@ -292,9 +299,10 @@ text-decoration: none;
 .submit-btn-login button{
     width: auto;
     font-size: 14px;
-    padding: 5px 18px;
+    padding: 5px 11px;
     background: #0052cc !important;
     border-radius: 3px !important;
+    font-weight: 600;
 }
 
 .signup-inner-wrapper{
@@ -306,10 +314,10 @@ text-decoration: none;
 }
 
 .top-nav-tp{
-    padding: 0 25px;
+    padding: 0px 25px;
     background: #f7f9f9;
     border-bottom: 1px solid #ebebeb;
-    position: absolute;
+    position: fixed;
     top: 0;
     width: 100%;
     z-index: 999;
@@ -325,8 +333,8 @@ text-decoration: none;
     background: #fff;
 }
 
-.top-nav-tp img{
-    width: 66px;
+.top-nav-tp img.logo-on-top{
+    width: 73px;
 }
 
 /* responsive popuo************************************* */

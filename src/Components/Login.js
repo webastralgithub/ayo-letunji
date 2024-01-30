@@ -16,7 +16,7 @@ import {
   FaPhone,
   FaUser,
 } from "react-icons/fa";
-const Login = ({ login, setLogin, isLoggedIn, setisLoggedIn }) => {
+const Login = ({ expanded,setExpanded,login, setLogin, isLoggedIn, setisLoggedIn }) => {
   const navigate = useNavigate();
   const [isLodaing, setIsLoading] = useState();
   const [passwordType, setPasswordType] = useState("password");
@@ -50,6 +50,7 @@ const Login = ({ login, setLogin, isLoggedIn, setisLoggedIn }) => {
     const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(String(email).toLowerCase());
   };
+  
   const submit = async (e) => {
     e.preventDefault();
 
@@ -74,13 +75,18 @@ const Login = ({ login, setLogin, isLoggedIn, setisLoggedIn }) => {
         }
 
         if (token) {
-          setIsLoading(false);
+        
           toast.success("Login successfully", {
             autoClose: 3000,
             position: toast.POSITION.TOP_RIGHT,
           });
-          setisLoggedIn(true);
-          navigate("/folders");
+         
+          setTimeout(() => {
+            setIsLoading(false);
+            setisLoggedIn(true);
+            navigate("/folders");
+          }, 800);
+         
         }
         setObj({});
         e.target.reset();
@@ -180,8 +186,19 @@ const Login = ({ login, setLogin, isLoggedIn, setisLoggedIn }) => {
             {error && <div style={{ color: "red" }}>{error}</div>}
             <div className="login-inner">
               <div className="login-input-wrapper">
-                <div class="card-header">Login</div>
+                <div class="card-header">Log in</div>
+                 {expanded && <div className="logout-message">
+                    <p>
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
+  <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+</svg>
+                   You have been successfully logged out
+                   </p>
 
+<span style={{cursor:"pointer"}} onClick={()=>{ setExpanded(false)}}><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+  <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
+</svg></span>
+                  </div>}
                 <div className="login-input-box">
                   <div className="mb-3 input-box">
                     <label>Username</label>
@@ -229,7 +246,7 @@ const Login = ({ login, setLogin, isLoggedIn, setisLoggedIn }) => {
 
                   <div className="submit-btn-login">
                     <Button type="submit" className="login-btn">
-                      Login
+                      Log in
                     </Button>
                   </div>
                 </div>

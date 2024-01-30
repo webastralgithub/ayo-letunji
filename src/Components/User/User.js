@@ -73,7 +73,7 @@ const User = () => {
            />
             </div>
           }
-     <MiniHeader head='Manage Users' />
+     <MiniHeader head='Manage User' />
       <UserTable userData={users} toggleActive={toggleActive} updateUserData={updateUserData } onUpdateStatus={handleUpdateStatus}/>
     </div>
   );

@@ -24,7 +24,7 @@ const App=()=> {
   const navigate=useNavigate()
   const location = useLocation();
   const [isHovered, setIsHovered] = useState(false);
-
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const handleMouseEnter = () => {
     setIsHovered(true);
   };
@@ -38,7 +38,7 @@ const App=()=> {
 }
 const onLogout=()=>{
   localStorage.clear()
-setExpanded(false)
+setExpanded(true)
   setisLoggedIn(false)
 navigate("/")
 }
@@ -54,15 +54,18 @@ navigate("/")
     {
       setisLoggedIn(true)
     }
-    //   const id = localStorage.getItem("id")
-    // setAccountType(Account)
-  }, [isLoggedIn]);
 
+  }, [isLoggedIn]);
+ 
+
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
   return (
     <>
  
     <div className="top-nav-tp">
-       <img src="/images/latunji-logo.png"/> 
+       <img className='logo-on-top' src="/images/latunji-logo.png"/> 
        
        {isLoggedIn &&<>
        <div  className={`user-dropdown ${isHovered ? "hovered" : ""}`}
@@ -82,11 +85,11 @@ navigate("/")
      { <Navbar isLoggedIn={isLoggedIn} setisLoggedIn={setisLoggedIn}/>}
      <div className={HomePageStyling}>
 
-      {isLoggedIn && location.pathname != '/termsandconditions' && <Sidebar />}
+      {isLoggedIn && location.pathname != '/termsandconditions' && isSidebarOpen && <Sidebar />}
       <Routes>
-        <Route exact path="/" element={<Home isLoggedIn={isLoggedIn} setisLoggedIn={setisLoggedIn}/>}  />
+        <Route exact path="/" element={<Home isLoggedIn={isLoggedIn} setisLoggedIn={setisLoggedIn} expanded={expanded} setExpanded={setExpanded}/>}  />
      
-        <Route path="/folders" element={<Protected isLoggedIn={isLoggedIn}> <div className='main'>  <Projects/></div></Protected>}/>
+        <Route path="/folders" element={<Protected isLoggedIn={isLoggedIn}> <div className='main'>  <Projects isSidebarOpen={setIsSidebarOpen}/></div></Protected>}/>
         <Route path="/user" element={<Protected isLoggedIn={isLoggedIn}> <div className='main'>  <User/></div></Protected>}/>
         <Route path="/attribute" element={<Protected isLoggedIn={isLoggedIn}> <div className='main'>  <Attribute/></div></Protected>}/>
       </Routes>

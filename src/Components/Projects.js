@@ -9,7 +9,7 @@ import "react-toastify/dist/ReactToastify.css";
 import AnnotateScreenshots from "./AnnotateScreenshots";
 import { DNA } from "react-loader-spinner";
 import BackButton from "./BackButton";
-const Projects = () => {
+const Projects = ({ isSidebarOpen}) => {
   const [folders, setNotes] = useState();
   const [toasterMessage, setToasterMessage] = useState("");
   const [notesScreen, setNotesScreen] = useState(false);
@@ -18,9 +18,11 @@ const Projects = () => {
   const [newViewName, setNewViewName] = useState("");
   const [title, setTitle] = useState();
   const [formType, setFormType] = useState();
-  const [folderId, setFolderId] = useState();
 
+  const [folderId, setFolderId] = useState();
+  const [folderDetail, setFolderDetails] = useState();
   const [views, setViews] = useState([]);
+  const [singleView, setSingleView] = useState({});
   const url = process.env.REACT_APP_API_KEY;
   const [isLodaing, setIsLoading] = useState();
 
@@ -30,7 +32,7 @@ const Projects = () => {
   }
   useEffect(() => {
     document.addEventListener("click", handleClickOutside);
-
+    isSidebarOpen(true)
     return () => {
       document.removeEventListener("click", handleClickOutside);
     };
@@ -60,10 +62,7 @@ const Projects = () => {
 
     setNotesScreen(true);
   };
-  const changeViewScreen = (note) => {
-    setScreenType("annotation");
-    setNotesScreen(true);
-  };
+
   const handleTdClick = (view) => {
     setSelectedView(view);
     setNewViewName(view.name);
@@ -87,6 +86,42 @@ const Projects = () => {
     }
     // Update the state in the parent component
   };
+  const updateName = async(id)=>{
+  
+      const body = { name: newViewName };
+      try {
+        setIsLoading(true);
+        if (screenType == "views") {
+          const res = await axios.patch(
+            `${url}/update-view/${id}`,
+            body,
+            config
+          );
+        } else {
+          const res = await axios.patch(
+            `${url}/update-folder/${id}`,
+            body,
+            config
+          );
+        }
+
+        setIsLoading(false);
+        handleUpdateName(id, newViewName);
+        if (screenType == "views") {
+          Swal.fire("Updated!", "View name is renamed", "success");
+        } else {
+          Swal.fire("Updated!", "Folder name is renamed", "success");
+        }
+      } catch (error) {
+        setIsLoading(false);
+        console.error("Error renaming view:", error);
+        Swal.fire("Error", error.response.data.message, "error");
+        // Handle error if the rename request fails
+      }
+      setSelectedView(null);
+      setNewViewName("");
+    
+  }
   const handleKeyUp = async (e, id) => {
     if (e.key === "Enter") {
       const body = { name: newViewName };
@@ -249,6 +284,7 @@ const Projects = () => {
       setScreenType("folder");
       setNotesScreen(false);
     } else if (screenType === "annotation") {
+      isSidebarOpen(true)
       setScreenType("views");
       setNotesScreen(true);
     } else if (screenType === "form" && !formType) {
@@ -290,7 +326,7 @@ const Projects = () => {
             : screenType === "views"
             ? "Views"
             : screenType === "annotation"
-            ? "Create Annotation"
+            ? singleView?.name
             : formType
             ? "Folder"
             : "View"
@@ -327,7 +363,7 @@ const Projects = () => {
             <table border="1">
               <thead>
                 <tr>
-                  <th>Folder Name</th>
+                  <th >Folder Name</th>
                   <th className="hightlgt">Views</th>
                   <th>Last Updated</th>
                   <th></th>
@@ -340,7 +376,7 @@ const Projects = () => {
                       
                         <td
                           onClick={() => handleTdClick(folder)}
-                          className={selectedView === folder ? "hightlgt" : ""}
+                          className={selectedView === folder ? "hightlgt highlight2" : "highlight2"}
                         >
                           {selectedView === folder ? (
                             <input
@@ -356,9 +392,9 @@ const Projects = () => {
                             folder.name
                           )}
 
-                          <button className="chnage-folder-nm-sv-btn">Save</button>
+                          {selectedView === folder && <button onClick={()=>{updateName(folder.id)}} className="chnage-folder-nm-sv-btn">Save</button>}
 
-                          <span className="edit-folder-name-edit">
+                <span className="edit-folder-name-edit">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
                               <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
                               <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
@@ -367,7 +403,7 @@ const Projects = () => {
                           
                         </td>
                      
-                      <td style={{ "padding-left": "20px" }}>
+                      <td style={{ "padding-left": "24px" }}>
                         {folder?.views?.length}
                       </td>
                       <td>
@@ -393,6 +429,7 @@ const Projects = () => {
                               changeScreen("views");
                               setViews(folder.views);
                               setFolderId(folder.id);
+                              setFolderDetails(folder)
                             }}
                             src="/images/eye.png"
                           />
@@ -408,7 +445,7 @@ const Projects = () => {
       )}
       {notesScreen && screenType == "annotation" && (
         <div>
-          <AnnotateScreenshots />
+          <AnnotateScreenshots folder={folderDetail} isSidebarOpen={isSidebarOpen} setScreenType={setScreenType} setNotesScreen={setNotesScreen}/>
           {/* <PageBuilder /> */}
         </div>
       )}
@@ -464,7 +501,7 @@ const Projects = () => {
               <table border="1">
                 <thead>
                   <tr>
-                    <th> Name</th>
+                    <th className="hightlgt"> View Name</th>
                     <th>Last Updated</th>
                     <th></th>
                   </tr>
@@ -475,7 +512,7 @@ const Projects = () => {
                       <tr key={index}>
                         <td
                           onClick={() => handleTdClick(view)}
-                          className={selectedView === view ? "hightlgt" : ""}
+                          className={selectedView === view ? "hightlgt highlight2" : "highlight2"}
                         >
                           {selectedView === view ? (
                             <input
@@ -488,7 +525,7 @@ const Projects = () => {
                           ) : (
                             view.name
                           )}
-                           <button className="chnage-folder-nm-sv-btn">Save</button>
+                           {selectedView === view && <button onClick={()=>{updateName(view.id)}} className="chnage-folder-nm-sv-btn">Save</button>}
 
                           <span className="edit-folder-name-edit">
                               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
@@ -517,6 +554,8 @@ const Projects = () => {
                             <img
                               onClick={() => {
                                 changeScreen("annotation");
+                                setSingleView(view)
+
                               }}
                               src="/images/eye.png"
                             />

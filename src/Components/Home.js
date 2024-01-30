@@ -6,7 +6,7 @@ import "./Home.css"
 import Login from "./Login";
 import { useLocation, useNavigate } from "react-router-dom";
 
-const Home = ({ isLoggedIn, setisLoggedIn }) => {
+const Home = ({ isLoggedIn, setisLoggedIn ,expanded ,setExpanded}) => {
   const navigate = useNavigate();
   const [show, setShow] = useState(false);
   const [login, setLogin] = useState("");
@@ -63,7 +63,8 @@ const Home = ({ isLoggedIn, setisLoggedIn }) => {
     <div className="main-content">
     
      
-   <Login
+   <Login           expanded={expanded}
+                    setExpanded={setExpanded}
                     login={login}
                     setLogin={setLogin}
                     isLoggedIn={isLoggedIn}
