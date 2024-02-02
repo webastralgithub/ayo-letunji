@@ -857,6 +857,7 @@ button.swal2-confirm{
 
 .rotate-icon{
   transform: rotate(90deg);
+  filter: invert(49%) sepia(98%) saturate(3261%) hue-rotate(357deg) brightness(99%) contrast(98%) !important;
 }
 
 .create-folder-nw-block{
@@ -871,7 +872,9 @@ button.swal2-confirm{
   margin-top: 15px;
   margin-bottom: 8px;
 }
-
+a .active{
+  color: #fb6b0a;
+}
 .create-folder-nw-block input{
   font-size: 14px;
   padding: 3px 11px;

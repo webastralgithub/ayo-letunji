@@ -322,7 +322,7 @@ const Projects = ({ isSidebarOpen}) => {
       <MiniHeader
         head={
           screenType === "folder"
-            ? "Folder"
+            ? "Folders"
             : screenType === "views"
             ? "Views"
             : screenType === "annotation"

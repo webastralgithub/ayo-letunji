@@ -13,11 +13,6 @@ const Table=({annotations,attribute})=>{
     setEditedAnnotations(updatedAnnotations);
   };
 
-  const handleSubmit = () => {
-    // Send `editedAnnotations` to the API
-    console.log("Sending data to API:", editedAnnotations);
-    // Replace `console.log` with your API call logic
-  };
   console.log(annotations);
   return (
     <div>
