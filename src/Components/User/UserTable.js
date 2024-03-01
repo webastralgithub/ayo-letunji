@@ -9,6 +9,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "./User.css";
 import { DNA } from "react-loader-spinner";
 import "react-toastify/dist/ReactToastify.css";
+
 const UserTable = ({ userData = [], toggleActive, updateUserData,onUpdateStatus }) => {
   console.log(userData);
   const columns = useMemo(
@@ -58,9 +59,11 @@ const UserTable = ({ userData = [], toggleActive, updateUserData,onUpdateStatus 
       Authorization: `Bearer ${token}`,
     },
   };
+
   const handleClose = () => {
     setShowModal(false);
   };
+
   const validateEmail = (email) => {
     const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(String(email).toLowerCase());
@@ -184,7 +187,7 @@ const UserTable = ({ userData = [], toggleActive, updateUserData,onUpdateStatus 
             </tr>
           </thead>
           <tbody {...getTableBodyProps()}>
-            {rows.map((row, index) => {
+            {rows && rows.map((row, index) => {
               prepareRow(row);
               return (
                 <tr {...row.getRowProps()} key={index}>

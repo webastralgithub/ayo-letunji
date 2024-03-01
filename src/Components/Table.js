@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./Table.css"
-const Table=({annotations,attribute})=>{
+const Table = ({ annotations, attribute }) => {
   const [editedAnnotations, setEditedAnnotations] = useState([]);
 
   useEffect(() => {
@@ -31,21 +31,21 @@ const Table=({annotations,attribute})=>{
         <tbody>
           {editedAnnotations.map((annotation, index) => (
             <tr key={index}>
-              <td>{index+1}</td>
+              <td>{index + 1}</td>
               <td>
-        <select
-          value={annotation.attribute}
-          onChange={(e) => handleFieldChange(index, 'attribute', e.target.value)}
-        >
-          {attribute
-            .filter((item) => item.id !== annotation.attribute) // Exclude the current attribute
-            .map((item) => (
-              <option key={item.id} value={item.id}>
-                {item.name}
-              </option>
-            ))}
-        </select>
-      </td>
+                <select
+                  value={annotation.attribute}
+                  onChange={(e) => handleFieldChange(index, 'attribute', e.target.value)}
+                >
+                  {attribute
+                    .filter((item) => item.id !== annotation.attribute) // Exclude the current attribute
+                    .map((item) => (
+                      <option key={item.id} value={item.id}>
+                        {item.name}
+                      </option>
+                    ))}
+                </select>
+              </td>
               <td
                 contentEditable
                 onBlur={(e) => handleFieldChange(index, 'description', e.target.innerText)}

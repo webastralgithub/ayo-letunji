@@ -2,6 +2,7 @@
   "name": "notes",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:3000",
   "dependencies": {
     "@fullcalendar/core": "^6.1.5",
     "@fullcalendar/daygrid": "^5.11.4",
@@ -40,6 +41,7 @@
     "react-image-markup": "^1.1.0",
     "react-loader-spinner": "^6.1.6",
     "react-modal": "^3.16.1",
+    "react-moveable": "^0.56.0",
     "react-region-select": "^2.3.0",
     "react-router-dom": "^6.4.3",
     "react-scripts": "5.0.1",
